@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login - Kinetic Enterprise Scheduler</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#e7e8e9",
+                      "outline-variant": "#c3c6d7",
+                      "error": "#ba1a1a",
+                      "tertiary": "#943700",
+                      "secondary": "#585f6c",
+                      "on-surface": "#191c1d",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#434655",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f0f1f2",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-primary-container": "#eeefff",
+                      "text-primary": "#111827",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#bc4800",
+                      "info": "#0EA5E9",
+                      "on-background": "#191c1d",
+                      "background": "#FAFBFC", /* Adjusted to match prompt */
+                      "surface-container-low": "#f3f4f5",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-tertiary-container": "#ffede6",
+                      "surface-tint": "#0053db",
+                      "primary": "#2563EB", /* Adjusted for consistent blue */
+                      "surface-secondary": "#F5F7FA",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#00174b",
+                      "warning": "#F59E0B",
+                      "secondary-fixed-dim": "#c0c7d6",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#dce2f3",
+                      "danger": "#EF4444",
+                      "tertiary-fixed": "#ffdbcd",
+                      "on-secondary-fixed-variant": "#404754",
+                      "surface-dim": "#d9dadb",
+                      "surface-container": "#edeeef",
+                      "surface": "#FFFFFF",
+                      "outline": "#737686",
+                      "surface-bright": "#f8f9fa",
+                      "primary-fixed": "#dbe1ff",
+                      "border": "#E5E7EB",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#151c27",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#dce2f3",
+                      "primary-container": "#2563eb",
+                      "inverse-primary": "#b4c5ff",
+                      "text-secondary": "#6B7280",
+                      "surface-variant": "#e1e3e4",
+                      "inverse-surface": "#2e3132",
+                      "on-tertiary-fixed": "#360f00",
+                      "success": "#22C55E",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "on-secondary-container": "#5e6572",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "surface-container-highest": "#e1e3e4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "code-sm": ["jetbrainsMono"],
+                      "headline-lg-mobile": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .ambient-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        .input-halo:focus {
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+        }
+
+        /* Loading animation */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body class="bg-background text-text-primary min-h-screen flex items-center justify-center p-4">
+<!-- Auth Container -->
+<div class="w-full max-w-md">
+<!-- Branding Header -->
+<div class="text-center mb-8">
+<div class="inline-flex items-center justify-center w-12 h-12 bg-primary rounded-lg mb-4 text-on-primary">
+<span class="material-symbols-outlined" style="font-size: 28px;">bolt</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Welcome to Kinetic</h1>
+<p class="font-body-md text-body-md text-text-secondary mt-2">Enterprise Job Scheduler</p>
+</div>
+<!-- Main Card -->
+<div class="bg-surface border border-border rounded-xl ambient-shadow p-8">
+<form id="loginForm" onsubmit="handleLogin(event)">
+<!-- Email Field -->
+<div class="mb-5">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2" for="email">Email Address</label>
+<input class="w-full h-10 px-3 py-2 bg-surface border border-border rounded-md font-body-md text-body-md text-on-surface placeholder:text-text-secondary outline-none focus:border-primary input-halo transition-all duration-200" id="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+<!-- Password Field -->
+<div class="mb-5">
+<div class="flex items-center justify-between mb-2">
+<label class="block font-label-sm text-label-sm text-on-surface-variant" for="password">Password</label>
+<a class="font-label-sm text-label-sm text-primary hover:text-on-primary-fixed-variant transition-colors" href="#">Forgot password?</a>
+</div>
+<div class="relative">
+<input class="w-full h-10 px-3 py-2 bg-surface border border-border rounded-md font-body-md text-body-md text-on-surface placeholder:text-text-secondary outline-none focus:border-primary input-halo transition-all duration-200" id="password" placeholder="••••••••" required="" type="password"/>
+<button class="absolute inset-y-0 right-0 px-3 flex items-center text-text-secondary hover:text-on-surface focus:outline-none" type="button">
+<span class="material-symbols-outlined" style="font-size: 20px;">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Remember Me -->
+<div class="flex items-center mb-6">
+<input class="w-4 h-4 text-primary bg-surface border-border rounded focus:ring-primary/20 focus:ring-2 focus:ring-offset-0" id="remember" type="checkbox"/>
+<label class="ml-2 font-body-md text-body-md text-on-surface-variant cursor-pointer" for="remember">
+                        Remember me for 30 days
+                    </label>
+</div>
+<!-- Submit Button -->
+<button class="w-full h-10 bg-primary hover:bg-surface-tint text-on-primary font-label-md text-label-md rounded-md flex items-center justify-center transition-colors duration-200 outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-1" id="submitBtn" type="submit">
+<span id="btnText">Sign in</span>
+<span class="material-symbols-outlined ml-2 hidden" id="btnIcon" style="font-size: 18px;">progress_activity</span>
+</button>
+</form>
+<!-- Divider -->
+<div class="mt-6 mb-6 flex items-center">
+<div class="flex-1 border-t border-border"></div>
+<span class="px-4 font-label-sm text-label-sm text-text-secondary">or continue with</span>
+<div class="flex-1 border-t border-border"></div>
+</div>
+<!-- Social Logins -->
+<div class="grid grid-cols-2 gap-3">
+<button class="flex items-center justify-center h-10 bg-surface border border-border hover:bg-surface-secondary hover:border-outline-variant text-on-surface font-label-md text-label-md rounded-md transition-all duration-200" type="button">
+<svg class="w-5 h-5 mr-2" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"></path>
+</svg>
+                    Google
+                </button>
+<button class="flex items-center justify-center h-10 bg-surface border border-border hover:bg-surface-secondary hover:border-outline-variant text-on-surface font-label-md text-label-md rounded-md transition-all duration-200" type="button">
+<svg aria-hidden="true" class="w-5 h-5 mr-2 text-[#24292F]" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+</svg>
+                    GitHub
+                </button>
+</div>
+</div>
+<!-- Footer Links -->
+<div class="mt-8 text-center">
+<p class="font-body-md text-body-md text-text-secondary">
+                Don't have an account? 
+                <a class="text-primary hover:text-on-primary-fixed-variant font-label-md transition-colors" href="#">Request Access</a>
+</p>
+</div>
+</div>
+<script>
+        function handleLogin(event) {
+            event.preventDefault();
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+            const btn = document.getElementById('submitBtn');
+            
+            // Simulate loading state
+            btn.classList.add('opacity-90', 'cursor-not-allowed');
+            btnText.textContent = 'Signing in...';
+            btnIcon.classList.remove('hidden');
+            btnIcon.classList.add('loading-spinner');
+            
+            setTimeout(() => {
+                // Reset state after simulation
+                btn.classList.remove('opacity-90', 'cursor-not-allowed');
+                btnText.textContent = 'Sign in';
+                btnIcon.classList.add('hidden');
+                btnIcon.classList.remove('loading-spinner');
+                
+                // Form reset or redirect would go here
+            }, 1500);
+        }
+    </script>
+</body></html>

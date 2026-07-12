@@ -1,0 +1,26 @@
+export enum JobStatus {
+  CREATED = 'CREATED',
+  QUEUED = 'QUEUED',
+  SCHEDULED = 'SCHEDULED',
+  CLAIMED = 'CLAIMED',
+  RUNNING = 'RUNNING',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+  RETRY_PENDING = 'RETRY_PENDING',
+  DEAD_LETTER = 'DEAD_LETTER'
+}
+
+export enum QueueStatus {
+  ACTIVE = 'ACTIVE',
+  PAUSED = 'PAUSED',
+  DRAINING = 'DRAINING',
+  DISABLED = 'DISABLED'
+}
+
+export enum WorkerStatus {
+  ONLINE = 'ONLINE',
+  BUSY = 'BUSY',
+  OFFLINE = 'OFFLINE',
+  DRAINING = 'DRAINING',
+  STOPPED = 'STOPPED'
+}

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Create New Job - Enterprise Scheduler</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e7e8e9",
+                        "outline-variant": "#c3c6d7",
+                        "error": "#ba1a1a",
+                        "tertiary": "#943700",
+                        "secondary": "#585f6c",
+                        "on-surface": "#191c1d",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#434655",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-container": "#eeefff",
+                        "text-primary": "#111827",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#bc4800",
+                        "info": "#0EA5E9",
+                        "on-background": "#191c1d",
+                        "background": "#f8f9fa",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-tint": "#0053db",
+                        "primary": "#004ac6",
+                        "surface-secondary": "#F5F7FA",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#00174b",
+                        "warning": "#F59E0B",
+                        "secondary-fixed-dim": "#c0c7d6",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#dce2f3",
+                        "danger": "#EF4444",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary-fixed-variant": "#404754",
+                        "surface-dim": "#d9dadb",
+                        "surface-container": "#edeeef",
+                        "surface": "#FFFFFF",
+                        "outline": "#737686",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed": "#dbe1ff",
+                        "border": "#E5E7EB",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#151c27",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dce2f3",
+                        "primary-container": "#2563eb",
+                        "inverse-primary": "#b4c5ff",
+                        "text-secondary": "#6B7280",
+                        "surface-variant": "#e1e3e4",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed": "#360f00",
+                        "success": "#22C55E",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-secondary-container": "#5e6572",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-container-highest": "#e1e3e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "code-sm": ["JetBrains Mono"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "code-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #dce2f3; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #c0c7d6; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col h-screen sticky left-0 top-0 w-64 border-r border-border dark:border-outline-variant bg-surface dark:bg-inverse-surface z-50">
+<div class="flex flex-col h-full py-6">
+<!-- Header -->
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary-container flex items-center justify-center font-bold">
+                        WS
+                    </div>
+<div>
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim leading-none truncate">
+                            Enterprise Scheduler
+                        </div>
+<div class="font-label-sm text-label-sm text-on-surface-variant mt-1">
+                            Production Cluster
+                        </div>
+</div>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-4 mb-6">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-on-primary py-2 px-4 rounded font-label-md text-label-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined" style="font-size: 18px;">add</span>
+                    New Job
+                </button>
+</div>
+<!-- Main Nav -->
+<div class="flex-1 overflow-y-auto custom-scrollbar">
+<ul class="space-y-1 font-label-md text-label-md">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                            Dashboard
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">corporate_fare</span>
+                            Organizations
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">folder</span>
+                            Projects
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">format_list_bulleted</span>
+                            Queues
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-primary dark:text-primary-fixed-dim bg-secondary-container/50 dark:bg-secondary/20 font-bold border-r-4 border-primary opacity-90 transition-all" href="#">
+<span class="material-symbols-outlined">analytics</span>
+                            Jobs
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">engineering</span>
+                            Workers
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">schedule</span>
+                            Scheduler
+                        </a>
+</li>
+</ul>
+</div>
+<!-- Footer Nav -->
+<div class="mt-auto px-0 pt-4 border-t border-border dark:border-outline-variant">
+<ul class="space-y-1 font-label-md text-label-md">
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+                            Settings
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">help</span>
+                            Support
+                        </a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<!-- Main Application Area -->
+<div class="flex-1 flex flex-col min-w-0 h-screen overflow-hidden relative">
+<!-- TopNavBar -->
+<header class="docked full-width top-0 sticky z-40 border-b border-border dark:border-outline-variant bg-surface/80 dark:bg-inverse-surface/80 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center w-full px-gutter h-16 max-w-container-max mx-auto">
+<!-- Left: Brand / Mobile Toggle / Search -->
+<div class="flex items-center gap-4 flex-1">
+<button class="md:hidden text-on-surface-variant p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="font-headline-md text-headline-md font-black text-on-surface dark:text-inverse-on-surface hidden md:block">
+                        Scheduler Console
+                    </div>
+<div class="ml-4 flex-1 max-w-md hidden md:flex items-center relative">
+<span class="material-symbols-outlined absolute left-3 text-on-surface-variant" style="font-size: 20px;">search</span>
+<input class="w-full bg-surface-container-low border-none rounded-full py-1.5 pl-10 pr-4 font-body-md text-body-md focus:ring-1 focus:ring-primary outline-none" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<!-- Center: Navigation Links -->
+<nav class="hidden lg:flex items-center gap-6 font-label-sm text-label-sm h-full pt-1">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50 dark:hover:bg-surface-container-highest/20 rounded-lg px-2 py-1 transition-colors" href="#">Documentation</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50 dark:hover:bg-surface-container-highest/20 rounded-lg px-2 py-1 transition-colors" href="#">API Reference</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50 dark:hover:bg-surface-container-highest/20 rounded-lg px-2 py-1 transition-colors" href="#">Status</a>
+</nav>
+<!-- Right: Actions -->
+<div class="flex items-center gap-2 justify-end flex-1">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-lg transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-high/50 rounded-lg transition-colors hidden sm:block">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="bg-primary text-on-primary font-label-sm text-label-sm px-4 py-1.5 rounded-lg ml-2 hover:opacity-90 transition-opacity font-bold">
+                        Deploy
+                    </button>
+<button class="w-8 h-8 rounded-full overflow-hidden ml-2 border border-border">
+<div class="w-full h-full bg-surface-container-high flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" style="font-size: 20px;">account_circle</span>
+</div>
+</button>
+</div>
+</div>
+</header>
+<!-- Page Content Canvas -->
+<main class="flex-1 overflow-y-auto p-margin-mobile md:p-margin-desktop custom-scrollbar">
+<div class="max-w-6xl mx-auto">
+<!-- Page Header -->
+<div class="mb-8 flex items-end justify-between">
+<div>
+<div class="flex items-center gap-2 text-on-surface-variant font-body-md text-body-md mb-2">
+<a class="hover:text-primary transition-colors" href="#">Jobs</a>
+<span class="material-symbols-outlined" style="font-size: 16px;">chevron_right</span>
+<span class="text-on-surface font-medium">Create New</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Configure Job Definition</h1>
+</div>
+<div class="hidden sm:flex gap-3">
+<button class="px-4 py-2 bg-surface border border-border rounded text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors">Cancel</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded font-label-md text-label-md hover:opacity-90 transition-opacity shadow-sm">Save Job</button>
+</div>
+</div>
+<!-- Bento-style Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Main Column -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Core Details Card -->
+<div class="bg-surface border border-border rounded-lg p-6 shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">info</span>
+                                Core Details
+                            </h2>
+<div class="space-y-5">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5">Job Name</label>
+<input class="w-full bg-surface border border-border rounded p-2.5 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all placeholder:text-outline-variant" placeholder="e.g., daily-data-aggregation" type="text"/>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5">Project Allocation</label>
+<div class="relative">
+<select class="w-full bg-surface border border-border rounded p-2.5 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all appearance-none pr-10">
+<option>Analytics Core</option>
+<option>Marketing Automation</option>
+<option>Infrastructure Ops</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5">Target Queue</label>
+<div class="relative">
+<select class="w-full bg-surface border border-border rounded p-2.5 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all appearance-none pr-10">
+<option>high-priority-compute</option>
+<option>batch-processing</option>
+<option>default</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Scheduling Card (Cron Builder) -->
+<div class="bg-surface border border-border rounded-lg p-6 shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">event</span>
+                                Execution Schedule
+                            </h2>
+<!-- Schedule Type Toggle -->
+<div class="flex p-1 bg-surface-container-low rounded-lg mb-6 w-fit border border-border">
+<button class="px-4 py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Immediate</button>
+<button class="px-4 py-1.5 rounded font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Delayed</button>
+<button class="px-4 py-1.5 rounded bg-surface shadow-sm font-label-md text-label-md text-primary font-medium border border-border/50">Recurring (Cron)</button>
+</div>
+<!-- Cron Builder Content -->
+<div class="space-y-6">
+<!-- Presets -->
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-2 uppercase tracking-wider">Common Patterns</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded border border-border bg-surface text-on-surface font-label-md text-label-md hover:border-primary hover:text-primary transition-colors text-sm">Every minute</button>
+<button class="px-3 py-1.5 rounded border border-border bg-surface text-on-surface font-label-md text-label-md hover:border-primary hover:text-primary transition-colors text-sm">Hourly</button>
+<button class="px-3 py-1.5 rounded border border-primary bg-primary/5 text-primary font-label-md text-label-md transition-colors text-sm font-medium">Daily at Midnight</button>
+<button class="px-3 py-1.5 rounded border border-border bg-surface text-on-surface font-label-md text-label-md hover:border-primary hover:text-primary transition-colors text-sm">Weekly</button>
+</div>
+</div>
+<!-- Custom Editor -->
+<div class="bg-surface-secondary border border-border rounded p-4">
+<div class="flex items-center gap-4 mb-2">
+<input class="flex-1 bg-surface border border-border rounded p-2.5 font-code-sm text-code-sm text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all tracking-widest text-lg" type="text" value="0 0 * * *"/>
+</div>
+<div class="flex items-start gap-2 mt-3 p-3 bg-info/10 border border-info/20 rounded text-on-surface font-body-md text-body-md">
+<span class="material-symbols-outlined text-info mt-0.5" style="font-size: 18px;">auto_awesome</span>
+<div>
+<span class="font-medium">Translated:</span> At 00:00 (Midnight), every day.
+                                            <div class="text-sm text-on-surface-variant mt-1">Next run: Today at 23:59:59 (in 14 hours)</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Payload Editor Card -->
+<div class="bg-surface border border-border rounded-lg shadow-sm overflow-hidden flex flex-col h-96">
+<div class="p-4 border-b border-border bg-surface flex justify-between items-center">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-on-surface-variant">data_object</span>
+                                    Task Payload
+                                </h2>
+<span class="font-label-sm text-label-sm px-2 py-1 bg-success/10 text-success rounded border border-success/20">Valid JSON</span>
+</div>
+<!-- Fake Monaco Editor -->
+<div class="flex-1 bg-[#0B0C0E] p-4 overflow-auto custom-scrollbar font-code-sm text-code-sm leading-relaxed">
+<pre class="text-outline-variant"><span class="text-primary-fixed-dim">{</span>
+  <span class="text-info">"action"</span><span class="text-primary-fixed-dim">:</span> <span class="text-warning">"aggregate_metrics"</span>,
+  <span class="text-info">"parameters"</span><span class="text-primary-fixed-dim">:</span> <span class="text-primary-fixed-dim">{</span>
+    <span class="text-info">"source_table"</span><span class="text-primary-fixed-dim">:</span> <span class="text-warning">"raw_events_stream"</span>,
+    <span class="text-info">"destination_table"</span><span class="text-primary-fixed-dim">:</span> <span class="text-warning">"daily_rollups"</span>,
+    <span class="text-info">"lookback_days"</span><span class="text-primary-fixed-dim">:</span> <span class="text-success">1</span>,
+    <span class="text-info">"strict_validation"</span><span class="text-primary-fixed-dim">:</span> <span class="text-primary-container">true</span>
+  <span class="text-primary-fixed-dim">}</span>,
+  <span class="text-info">"environment"</span><span class="text-primary-fixed-dim">:</span> <span class="text-warning">"production"</span>
+<span class="text-primary-fixed-dim">}</span>
+</pre>
+</div>
+</div>
+</div>
+<!-- Side Column -->
+<div class="space-y-6">
+<!-- Execution Policies -->
+<div class="bg-surface border border-border rounded-lg p-6 shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-6 flex items-center gap-2 border-b border-border pb-4">
+<span class="material-symbols-outlined text-on-surface-variant">policy</span>
+                                Policies
+                            </h2>
+<div class="space-y-5">
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5">Retry Strategy</label>
+<div class="relative mb-3">
+<select class="w-full bg-surface border border-border rounded p-2.5 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all appearance-none pr-10">
+<option>Exponential Backoff</option>
+<option>Fixed Interval</option>
+<option>None (Fail Fast)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-2.5 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+<!-- Retry Preview -->
+<div class="bg-surface-secondary border border-border border-dashed rounded p-3 font-body-md text-sm text-on-surface-variant">
+<div class="flex justify-between items-center mb-1">
+<span>Max Retries:</span>
+<span class="text-on-surface font-medium">3</span>
+</div>
+<div class="h-px bg-border w-full my-2"></div>
+<ul class="space-y-1">
+<li class="flex justify-between"><span>Attempt 1:</span> <span>+5s</span></li>
+<li class="flex justify-between"><span>Attempt 2:</span> <span>+25s</span></li>
+<li class="flex justify-between"><span>Attempt 3:</span> <span>+125s</span></li>
+</ul>
+</div>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5">Timeout Duration</label>
+<div class="flex items-center gap-2">
+<input class="w-24 bg-surface border border-border rounded p-2.5 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all" type="number" value="3600"/>
+<span class="text-on-surface-variant font-body-md">seconds</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Summary & Actions (Mobile) -->
+<div class="bg-surface border border-border rounded-lg p-6 shadow-sm sm:hidden">
+<button class="w-full py-3 bg-primary text-on-primary rounded font-label-md text-label-md hover:opacity-90 transition-opacity shadow-sm mb-3">Save Job Definition</button>
+<button class="w-full py-3 bg-surface border border-border rounded text-on-surface font-label-md text-label-md hover:bg-surface-container-low transition-colors">Cancel</button>
+</div>
+</div>
+</div>
+<div class="h-12"></div> <!-- Bottom padding -->
+</div>
+</main>
+</div>
+</body></html>

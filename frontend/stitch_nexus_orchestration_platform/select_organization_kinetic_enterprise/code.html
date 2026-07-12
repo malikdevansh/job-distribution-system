@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Organization Selection - Scheduler Console</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e7e8e9",
+                        "outline-variant": "#c3c6d7",
+                        "error": "#ba1a1a",
+                        "tertiary": "#943700",
+                        "secondary": "#585f6c",
+                        "on-surface": "#191c1d",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#434655",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f0f1f2",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-container": "#eeefff",
+                        "text-primary": "#111827",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#bc4800",
+                        "info": "#0EA5E9",
+                        "on-background": "#191c1d",
+                        "background": "#f8f9fa",
+                        "surface-container-low": "#f3f4f5",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-tint": "#0053db",
+                        "primary": "#004ac6",
+                        "surface-secondary": "#F5F7FA",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed": "#00174b",
+                        "warning": "#F59E0B",
+                        "secondary-fixed-dim": "#c0c7d6",
+                        "on-error": "#ffffff",
+                        "secondary-fixed": "#dce2f3",
+                        "danger": "#EF4444",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-secondary-fixed-variant": "#404754",
+                        "surface-dim": "#d9dadb",
+                        "surface-container": "#edeeef",
+                        "surface": "#FFFFFF",
+                        "outline": "#737686",
+                        "surface-bright": "#f8f9fa",
+                        "primary-fixed": "#dbe1ff",
+                        "border": "#E5E7EB",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#151c27",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#dce2f3",
+                        "primary-container": "#2563eb",
+                        "inverse-primary": "#b4c5ff",
+                        "text-secondary": "#6B7280",
+                        "surface-variant": "#e1e3e4",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-fixed": "#360f00",
+                        "success": "#22C55E",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-secondary-container": "#5e6572",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-container-highest": "#e1e3e4"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "gutter": "24px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "code-sm": ["jetbrainsMono"],
+                        "headline-lg-mobile": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "fontWeight": "500" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "code-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-lg": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface-secondary min-h-screen text-on-surface font-body-md">
+<!-- Navigation Shell Suppressed: Top-level entry point before full dashboard access -->
+<main class="max-w-container-max mx-auto px-gutter md:px-margin-desktop py-16 flex flex-col items-center justify-center min-h-screen">
+<div class="text-center mb-12 w-full max-w-3xl">
+<h1 class="font-display-lg text-display-lg text-on-surface mb-4">Select an Organization</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Choose an existing workspace to continue or create a new one for your team.</p>
+</div>
+<!-- Organization Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
+<!-- Org Card 1 -->
+<a class="group bg-surface border border-border rounded-xl p-6 hover:border-outline-variant hover:bg-surface-bright transition-all duration-200 flex flex-col h-full relative overflow-hidden shadow-sm hover:shadow-md" href="#">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-2xl" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+</div>
+<span class="bg-surface-container-high px-2 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-success"></span> Active
+                    </span>
+</div>
+<div class="flex-grow">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Engineering Dept</h2>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4">Core infrastructure and backend services scheduling cluster.</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg mr-1.5">group</span>
+<span class="font-label-md text-label-md">24 Members</span>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg mr-1.5">analytics</span>
+<span class="font-label-md text-label-md">142 Jobs</span>
+</div>
+</div>
+</a>
+<!-- Org Card 2 -->
+<a class="group bg-surface border border-border rounded-xl p-6 hover:border-outline-variant hover:bg-surface-bright transition-all duration-200 flex flex-col h-full relative overflow-hidden shadow-sm hover:shadow-md" href="#">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary-container text-2xl" style="font-variation-settings: 'FILL' 1;">campaign</span>
+</div>
+<span class="bg-surface-container-high px-2 py-1 rounded-full font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-success"></span> Active
+                    </span>
+</div>
+<div class="flex-grow">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-2 group-hover:text-primary transition-colors">Marketing Ops</h2>
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2 mb-4">Campaign analytics and regular data sync pipelines.</p>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-border mt-auto">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg mr-1.5">group</span>
+<span class="font-label-md text-label-md">8 Members</span>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-lg mr-1.5">analytics</span>
+<span class="font-label-md text-label-md">35 Jobs</span>
+</div>
+</div>
+</a>
+<!-- Create New Card -->
+<button class="group bg-surface-container-lowest border-2 border-dashed border-outline-variant rounded-xl p-6 hover:border-primary hover:bg-surface-bright transition-all duration-200 flex flex-col h-full items-center justify-center min-h-[220px]">
+<div class="w-14 h-14 rounded-full bg-surface-container-high group-hover:bg-primary-container group-hover:text-on-primary-container text-on-surface-variant flex items-center justify-center mb-4 transition-colors">
+<span class="material-symbols-outlined text-3xl">add</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Create New Organization</h2>
+<p class="font-body-md text-body-md text-on-surface-variant text-center mt-2">Set up a new workspace for your team.</p>
+</button>
+</div>
+<div class="mt-12 text-center">
+<a class="font-label-md text-label-md text-primary hover:text-on-primary-fixed-variant transition-colors flex items-center justify-center gap-1" href="#">
+<span class="material-symbols-outlined text-sm">logout</span> Sign out
+             </a>
+</div>
+</main>
+</body></html>

@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Job Explorer - Enterprise Scheduler</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-high": "#e7e8e9",
+                      "outline-variant": "#c3c6d7",
+                      "error": "#ba1a1a",
+                      "tertiary": "#943700",
+                      "secondary": "#585f6c",
+                      "on-surface": "#191c1d",
+                      "on-primary": "#ffffff",
+                      "on-surface-variant": "#434655",
+                      "on-error-container": "#93000a",
+                      "inverse-on-surface": "#f0f1f2",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "on-primary-container": "#eeefff",
+                      "text-primary": "#111827",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#bc4800",
+                      "info": "#0EA5E9",
+                      "on-background": "#191c1d",
+                      "background": "#f8f9fa",
+                      "surface-container-low": "#f3f4f5",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-tertiary-container": "#ffede6",
+                      "surface-tint": "#0053db",
+                      "primary": "#004ac6",
+                      "surface-secondary": "#F5F7FA",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-fixed": "#00174b",
+                      "warning": "#F59E0B",
+                      "secondary-fixed-dim": "#c0c7d6",
+                      "on-error": "#ffffff",
+                      "secondary-fixed": "#dce2f3",
+                      "danger": "#EF4444",
+                      "tertiary-fixed": "#ffdbcd",
+                      "on-secondary-fixed-variant": "#404754",
+                      "surface-dim": "#d9dadb",
+                      "surface-container": "#edeeef",
+                      "surface": "#FFFFFF",
+                      "outline": "#737686",
+                      "surface-bright": "#f8f9fa",
+                      "primary-fixed": "#dbe1ff",
+                      "border": "#E5E7EB",
+                      "on-secondary": "#ffffff",
+                      "on-secondary-fixed": "#151c27",
+                      "surface-container-lowest": "#ffffff",
+                      "secondary-container": "#dce2f3",
+                      "primary-container": "#2563eb",
+                      "inverse-primary": "#b4c5ff",
+                      "text-secondary": "#6B7280",
+                      "surface-variant": "#e1e3e4",
+                      "inverse-surface": "#2e3132",
+                      "on-tertiary-fixed": "#360f00",
+                      "success": "#22C55E",
+                      "on-tertiary-fixed-variant": "#7d2d00",
+                      "on-secondary-container": "#5e6572",
+                      "tertiary-fixed-dim": "#ffb596",
+                      "surface-container-highest": "#e1e3e4"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-max": "1440px",
+                      "gutter": "24px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "32px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "label-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "code-sm": ["JetBrains Mono"],
+                      "headline-lg-mobile": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "display-lg": ["36px", {"lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "code-sm": ["13px", {"lineHeight": "18px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.015em", "fontWeight": "600"}],
+                      "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+          font-variation-settings: 'FILL' 1;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md min-h-screen flex">
+<!-- SideNavBar (Shared Component) -->
+<aside class="h-screen sticky left-0 top-0 w-64 border-r border-border dark:border-outline-variant bg-surface dark:bg-inverse-surface flex flex-col h-full py-6 hidden md:flex z-30">
+<!-- Header -->
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-primary-container text-on-primary flex items-center justify-center font-bold text-lg">
+                S
+            </div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim leading-tight tracking-tight">Enterprise Scheduler</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-0.5">Production Cluster</p>
+</div>
+</div>
+<!-- CTA -->
+<div class="px-4 mb-6">
+<button class="w-full bg-primary hover:bg-primary/90 text-on-primary font-label-md text-label-md py-2.5 px-4 rounded-lg flex items-center justify-center gap-2 transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="add" style="font-size: 18px;">add</span>
+                New Job
+            </button>
+</div>
+<!-- Navigation Tabs -->
+<nav class="flex-1 overflow-y-auto px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="corporate_fare">corporate_fare</span>
+<span class="font-label-md text-label-md">Organizations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="folder">folder</span>
+<span class="font-label-md text-label-md">Projects</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="format_list_bulleted">format_list_bulleted</span>
+<span class="font-label-md text-label-md">Queues</span>
+</a>
+<!-- Active State Logic Applied Here: Jobs -->
+<a class="flex items-center gap-3 px-4 py-2 text-primary dark:text-primary-fixed-dim bg-secondary-container/50 dark:bg-secondary/20 font-bold border-r-4 border-primary rounded-l-lg opacity-90 transition-all" href="#">
+<span class="material-symbols-outlined fill" data-icon="analytics" data-weight="fill">analytics</span>
+<span class="font-label-md text-label-md">Jobs</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="engineering">engineering</span>
+<span class="font-label-md text-label-md">Workers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+<span class="font-label-md text-label-md">Scheduler</span>
+</a>
+</nav>
+<!-- Footer Navigation -->
+<div class="mt-auto pt-6 px-2 border-t border-border dark:border-outline-variant mx-4">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200 rounded-lg mb-1" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant dark:text-surface-variant hover:text-primary hover:bg-surface-container-low dark:hover:bg-surface-dim transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0 bg-background">
+<!-- TopAppBar Context (Simulated for layout consistency, though not strictly required by shell rules if SideNav is present, often used together in enterprise) -->
+<header class="bg-surface border-b border-border h-16 flex items-center justify-between px-gutter sticky top-0 z-20">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md font-semibold text-on-surface">Job Explorer</h2>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant" data-icon="search" style="font-size: 18px;">search</span>
+<input class="pl-9 pr-4 py-1.5 bg-surface-container-low border border-border rounded-lg font-body-md text-body-md w-64 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all" placeholder="Search jobs by ID or name..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-danger rounded-full border border-surface"></span>
+</button>
+</div>
+</header>
+<!-- Canvas -->
+<div class="flex-1 p-gutter max-w-container-max mx-auto w-full overflow-x-hidden">
+<!-- Filters & Bulk Actions -->
+<div class="flex flex-col xl:flex-row xl:items-center justify-between gap-4 mb-6">
+<!-- Advanced Filter Bar -->
+<div class="flex flex-wrap items-center gap-2">
+<div class="relative group">
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-border rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:border-outline transition-all">
+<span class="material-symbols-outlined" data-icon="filter_alt" style="font-size: 16px;">filter_alt</span>
+                            Status
+                            <span class="material-symbols-outlined" data-icon="arrow_drop_down" style="font-size: 16px;">arrow_drop_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-border rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:border-outline transition-all">
+                            Queue
+                            <span class="material-symbols-outlined" data-icon="arrow_drop_down" style="font-size: 16px;">arrow_drop_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-border rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:border-outline transition-all">
+                            Worker
+                            <span class="material-symbols-outlined" data-icon="arrow_drop_down" style="font-size: 16px;">arrow_drop_down</span>
+</button>
+</div>
+<div class="relative group">
+<button class="flex items-center gap-2 px-3 py-1.5 bg-surface border border-border rounded-lg font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low hover:border-outline transition-all">
+<span class="material-symbols-outlined" data-icon="calendar_today" style="font-size: 16px;">calendar_today</span>
+                            Last 24 Hours
+                        </button>
+</div>
+<button class="text-primary font-label-md text-label-md hover:underline ml-2">Clear All</button>
+</div>
+<!-- Bulk Actions (Disabled state by default) -->
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md text-outline-variant mr-2">0 selected</span>
+<button class="px-3 py-1.5 bg-surface border border-border rounded-lg font-label-md text-label-md text-outline-variant cursor-not-allowed flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="replay" style="font-size: 16px;">replay</span>
+                        Retry
+                    </button>
+<button class="px-3 py-1.5 bg-surface border border-border rounded-lg font-label-md text-label-md text-outline-variant cursor-not-allowed flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="cancel" style="font-size: 16px;">cancel</span>
+                        Cancel
+                    </button>
+<button class="px-3 py-1.5 bg-surface border border-border rounded-lg font-label-md text-label-md text-outline-variant cursor-not-allowed flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="delete" style="font-size: 16px;">delete</span>
+                        Delete
+                    </button>
+</div>
+</div>
+<!-- Data Table Widget -->
+<div class="bg-surface border border-border rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-border">
+<th class="py-2.5 px-4 w-12 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface" type="checkbox"/>
+</th>
+<th class="py-2.5 px-4 font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-wide uppercase">Job ID</th>
+<th class="py-2.5 px-4 font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-wide uppercase">Name</th>
+<th class="py-2.5 px-4 font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-wide uppercase">Status</th>
+<th class="py-2.5 px-4 font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-wide uppercase">Queue</th>
+<th class="py-2.5 px-4 font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-wide uppercase">Worker</th>
+<th class="py-2.5 px-4 font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-wide uppercase">Started At</th>
+<th class="py-2.5 px-4 font-label-sm text-label-sm text-on-surface-variant font-semibold tracking-wide uppercase text-right">Duration</th>
+<th class="py-2.5 px-4 w-12"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border bg-surface font-body-md text-body-md">
+<!-- Row 1: Running -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-2 px-4 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface" type="checkbox"/>
+</td>
+<td class="py-2 px-4">
+<a class="font-code-sm text-code-sm text-primary hover:underline" href="#">job_8f72a1b9</a>
+</td>
+<td class="py-2 px-4 font-medium text-on-surface">DataSync_Prod_DB</td>
+<td class="py-2 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-info/10 text-info font-label-sm text-label-sm border border-info/20">
+<span class="w-1.5 h-1.5 rounded-full bg-info animate-pulse"></span>
+                                        Running
+                                    </span>
+</td>
+<td class="py-2 px-4 text-on-surface-variant">high-priority</td>
+<td class="py-2 px-4 text-on-surface-variant">worker-node-04</td>
+<td class="py-2 px-4 text-on-surface-variant font-code-sm text-code-sm">2023-10-27 14:32:01</td>
+<td class="py-2 px-4 text-right text-on-surface-variant font-code-sm text-code-sm">02:14</td>
+<td class="py-2 px-4 text-right">
+<button class="text-outline-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="more_vert" style="font-size: 20px;">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Failed -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-2 px-4 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface" type="checkbox"/>
+</td>
+<td class="py-2 px-4">
+<a class="font-code-sm text-code-sm text-primary hover:underline" href="#">job_3c4d5e6f</a>
+</td>
+<td class="py-2 px-4 font-medium text-on-surface">Weekly_Report_Gen</td>
+<td class="py-2 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-danger/10 text-danger font-label-sm text-label-sm border border-danger/20">
+<span class="material-symbols-outlined" data-icon="error" style="font-size: 14px;">error</span>
+                                        Failed
+                                    </span>
+</td>
+<td class="py-2 px-4 text-on-surface-variant">reporting</td>
+<td class="py-2 px-4 text-on-surface-variant">worker-node-12</td>
+<td class="py-2 px-4 text-on-surface-variant font-code-sm text-code-sm">2023-10-27 14:15:00</td>
+<td class="py-2 px-4 text-right text-on-surface-variant font-code-sm text-code-sm">05:42</td>
+<td class="py-2 px-4 text-right">
+<button class="text-outline-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="more_vert" style="font-size: 20px;">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Success -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-2 px-4 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface" type="checkbox"/>
+</td>
+<td class="py-2 px-4">
+<a class="font-code-sm text-code-sm text-primary hover:underline" href="#">job_9a8b7c6d</a>
+</td>
+<td class="py-2 px-4 font-medium text-on-surface">Cache_Invalidation</td>
+<td class="py-2 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-success/10 text-success font-label-sm text-label-sm border border-success/20">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-size: 14px;">check_circle</span>
+                                        Completed
+                                    </span>
+</td>
+<td class="py-2 px-4 text-on-surface-variant">system-ops</td>
+<td class="py-2 px-4 text-on-surface-variant">worker-node-01</td>
+<td class="py-2 px-4 text-on-surface-variant font-code-sm text-code-sm">2023-10-27 14:00:05</td>
+<td class="py-2 px-4 text-right text-on-surface-variant font-code-sm text-code-sm">00:03</td>
+<td class="py-2 px-4 text-right">
+<button class="text-outline-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="more_vert" style="font-size: 20px;">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Queued -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-2 px-4 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface" type="checkbox"/>
+</td>
+<td class="py-2 px-4">
+<a class="font-code-sm text-code-sm text-primary hover:underline" href="#">job_1x2y3z4w</a>
+</td>
+<td class="py-2 px-4 font-medium text-on-surface">Image_Optimization_Batch</td>
+<td class="py-2 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant font-label-sm text-label-sm border border-outline-variant">
+<span class="material-symbols-outlined" data-icon="hourglass_empty" style="font-size: 14px;">hourglass_empty</span>
+                                        Queued
+                                    </span>
+</td>
+<td class="py-2 px-4 text-on-surface-variant">media-processing</td>
+<td class="py-2 px-4 text-outline-variant italic">Pending</td>
+<td class="py-2 px-4 text-on-surface-variant font-code-sm text-code-sm">-</td>
+<td class="py-2 px-4 text-right text-on-surface-variant font-code-sm text-code-sm">-</td>
+<td class="py-2 px-4 text-right">
+<button class="text-outline-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="more_vert" style="font-size: 20px;">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Success -->
+<tr class="hover:bg-surface-bright transition-colors group">
+<td class="py-2 px-4 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary/20 bg-surface" type="checkbox"/>
+</td>
+<td class="py-2 px-4">
+<a class="font-code-sm text-code-sm text-primary hover:underline" href="#">job_5v6u7t8s</a>
+</td>
+<td class="py-2 px-4 font-medium text-on-surface">Log_Archival_Daily</td>
+<td class="py-2 px-4">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-success/10 text-success font-label-sm text-label-sm border border-success/20">
+<span class="material-symbols-outlined" data-icon="check_circle" style="font-size: 14px;">check_circle</span>
+                                        Completed
+                                    </span>
+</td>
+<td class="py-2 px-4 text-on-surface-variant">maintenance</td>
+<td class="py-2 px-4 text-on-surface-variant">worker-node-09</td>
+<td class="py-2 px-4 text-on-surface-variant font-code-sm text-code-sm">2023-10-27 13:45:00</td>
+<td class="py-2 px-4 text-right text-on-surface-variant font-code-sm text-code-sm">12:34</td>
+<td class="py-2 px-4 text-right">
+<button class="text-outline-variant hover:text-on-surface opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined" data-icon="more_vert" style="font-size: 20px;">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="border-t border-border bg-surface px-4 py-3 flex items-center justify-between">
+<div class="text-on-surface-variant font-body-md text-body-md">
+                        Showing <span class="font-medium text-on-surface">1</span> to <span class="font-medium text-on-surface">5</span> of <span class="font-medium text-on-surface">1,248</span> jobs
+                    </div>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded-md border border-border text-outline-variant cursor-not-allowed bg-surface-container-low">
+<span class="material-symbols-outlined" data-icon="chevron_left" style="font-size: 18px;">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-md bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center">1</button>
+<button class="w-8 h-8 rounded-md hover:bg-surface-container-low text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">2</button>
+<button class="w-8 h-8 rounded-md hover:bg-surface-container-low text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">3</button>
+<span class="text-outline-variant px-1">...</span>
+<button class="w-8 h-8 rounded-md hover:bg-surface-container-low text-on-surface font-label-md text-label-md flex items-center justify-center transition-colors">250</button>
+<button class="p-1.5 rounded-md border border-border text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right" style="font-size: 18px;">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

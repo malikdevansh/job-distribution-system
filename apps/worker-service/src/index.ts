@@ -172,7 +172,7 @@ async function poll() {
 
   try {
     const queues = await prisma.queue.findMany({
-      where: { projectId: PROJECT_ID, status: 'ACTIVE' }
+      where: { projectId: PROJECT_ID!, status: 'ACTIVE' }
     });
 
     if (queues.length === 0) {

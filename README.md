@@ -66,18 +66,6 @@ The platform exposes a versioned, RESTful API (`/api/v1`).
 | `/workers` | `GET` | View active, online workers in the fleet |
 | `/metrics` | `GET` | Retrieve real-time system metrics via Redis |
 
-## 🧪 Testing
-
-The repository contains several automated E2E and unit test suites that validate API contracts, state transitions, and UI components.
-
-```bash
-# Run End-to-End Job Flow Verification
-node verify_jobs.js
-
-# Run Frontend Browser Automation Tests
-node apps/backend-api/verify_browser.js
-```
-
 ## 🔒 Security
 
 *   **JWT Authentication**: All control-plane APIs are secured via stateless JWTs.
